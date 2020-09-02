@@ -1,0 +1,195 @@
+/* Form controls */
+@include form-control-placeholder(#6c757c, 1);
+
+.form-control {
+  border-color: lighten($black, 5%);
+  border-radius: $border-radius-lg;
+  font-size: $font-size-sm;
+  @include transition-input-focus-color();
+
+  &:focus {
+    border-color: $primary;
+    background-color: $input-bg;
+    @include box-shadow(none);
+
+    & + .input-group-append .input-group-text,
+    & ~ .input-group-append .input-group-text,
+    & + .input-group-prepend .input-group-text,
+    & ~ .input-group-prepend .input-group-text {
+      border: 1px solid $primary;
+      border-left: none;
+      background-color: $transparent-bg;
+    }
+  }
+
+  .has-success &,
+  .has-error &,
+  .has-success &:focus,
+  .has-error &:focus {
+    @include box-shadow(none);
+  }
+
+  .has-danger &,
+  .has-success & {
+    &.form-control-success,
+    &.form-control-danger {
+      background-image: none;
+    }
+  }
+
+  & + .form-control-feedback {
+    border-radius: $border-radius-lg;
+    margin-top: -7px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    vertical-align: middle;
+  }
+
+  .open & {
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+    border-bottom-color: $transparent-bg;
+  }
+
+  & + .input-group-append .input-group-text,
+  & + .input-group-prepend .input-group-text {
+    background-color: $white;
+  }
+}
+
+.has-success .input-group-append .input-group-text,
+.has-success .input-group-prepend .input-group-text,
+.has-success .form-control {
+  border-color: lighten($black, 5%);
+}
+
+.has-success .form-control:focus,
+.has-success.input-group-focus .input-group-append .input-group-text,
+.has-success.input-group-focus .input-group-prepend .input-group-text {
+  border-color: darken($success, 10%);
+}
+
+.has-danger .form-control,
+.has-danger .input-group-append .input-group-text,
+.has-danger .input-group-prepend .input-group-text,
+.has-danger.input-group-focus .input-group-prepend .input-group-text,
+.has-danger.input-group-focus .input-group-append .input-group-text {
+  border-color: lighten($danger-states, 5%);
+  color: $danger-states;
+  background-color: rgba(222, 222, 222, 0.1);
+
+  &:focus {
+    background-color: $transparent-bg;
+  }
+}
+
+.has-success,
+.has-danger {
+  &:after {
+    font-family: 'nucleo';
+    content: '\ea1b';
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    color: $success;
+    font-size: 11px;
+  }
+
+  &.form-control-lg {
+    &:after {
+      font-size: 13px;
+      top: 24px;
+    }
+  }
+
+  &.has-label {
+    &:after {
+      top: 37px;
+    }
+  }
+
+  &.form-check:after {
+    display: none !important;
+  }
+
+  &.form-check .form-check-label {
+    color: $success;
+  }
+}
+
+.has-danger {
+  &:after {
+    content: '\ea48';
+    color: $danger-states;
+  }
+
+  &.form-check .form-check-label {
+    color: $danger-states;
+  }
+}
+
+.file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: $custom-file-height;
+  margin: 0;
+  opacity: 0;
+
+  &:focus ~ .file-label {
+    border-color: lighten($black, 5%);
+    box-shadow: $custom-file-focus-box-shadow;
+  }
+
+  &:disabled ~ .file-label {
+    background-color: $custom-file-disabled-bg;
+  }
+
+  @each $lang, $value in $custom-file-text {
+    &:lang(#{$lang}) ~ .file-label::after {
+      content: $value;
+    }
+  }
+
+  ~ .file-label[data-browse]::after {
+    content: attr(data-browse);
+  }
+}
+
+.file-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: $custom-file-height;
+  padding: $custom-file-padding-y $custom-file-padding-x;
+  font-family: $custom-file-font-family;
+  font-weight: $custom-file-font-weight;
+  line-height: $custom-file-line-height;
+  color: $custom-file-color;
+  background-color: $custom-file-bg;
+  border: $custom-file-border-width solid lighten($black, 5%);
+  @include border-radius($custom-file-border-radius);
+  @include box-shadow($custom-file-box-shadow);
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: $custom-file-height-inner;
+    padding: $custom-file-padding-y $custom-file-padding-x;
+    line-height: $custom-file-line-height;
+    color: $custom-file-button-color;
+    content: 'Browse';
+    background: linear-gradient(to bottom left, #e14eca, #ba54f5, #e14eca);
+    border-left: inherit;
+    @include border-radius(
+      0 $custom-file-border-radius $custom-file-border-radius 0
+    );
+  }
+}
