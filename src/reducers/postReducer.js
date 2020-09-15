@@ -2,7 +2,7 @@ import { FETCH_POSTS, NEW_POST, FETCH_SINGLE_POST } from '../actions/types';
 
 const initialState = {
   items: [],
-  item: {}
+  item: {},
 };
 
 export default function (state = initialState, action) {
@@ -10,19 +10,19 @@ export default function (state = initialState, action) {
     case FETCH_POSTS:
       return {
         ...state,
-        items: action.publications
+        items: action.payload,
       };
 
     case NEW_POST:
       return {
         ...state,
-        items: action.newPublication
+        items: action.newPublication,
       };
 
     case FETCH_SINGLE_POST:
       return {
         ...state,
-        items: action.publication
+        items: action.publication,
       };
 
     default:

@@ -17,7 +17,7 @@ class Main extends Component {
         <div className="row">
           <div className="row post-list">
             <div className="col-md-8">
-              {this.props.posts.map(publication => (
+              {this.props.posts.map((publication) => (
                 <div className="post-item-wrapper" key={publication._id}>
                   <div className="card mb-3">
                     <img
@@ -60,11 +60,11 @@ class Main extends Component {
 
 PostsComponent.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
-  posts: PropTypes.array.isRequired
+  posts: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-  posts: state.posts.items
+const mapStateToProps = (state) => ({
+  posts: state.posts.items,
 });
 
 export default connect(mapStateToProps, { fetchPosts })(Main);

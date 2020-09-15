@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { fetchSinglePost } from '../../actions/postActions';
 
 class PostsComponent extends Component {
   componentWillMount() {
     this.props.fetchSinglePost();
   }
+
   render() {
     return (
       <div className="container">
@@ -44,4 +46,4 @@ class PostsComponent extends Component {
     );
   }
 }
-export default PostsComponent;
+export default connect(null, { fetchSinglePost })(PostsComponent);
