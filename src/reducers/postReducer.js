@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
     case FETCH_SINGLE_POST:
       return {
         ...state,
-        items: action.publication,
+        item: action.payload,
       };
 
     default:

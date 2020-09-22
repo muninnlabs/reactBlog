@@ -1,31 +1,25 @@
 import React, { Component } from 'react';
-import api from '../../services/api.service';
-// import { Link } from 'react-router-dom';
 import PostsComponent from '../../components/posts/posts.component';
-import PostFormComponent from '../../components/posts/post-form.component';
 
-export default class Publication extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      publication: {}
-    };
-  }
+import { connect } from 'react-redux';
+import { fetchSinglePost } from '../../actions/postActions';
 
-  async componentDidMount() {
-    const { id } = this.props.match.params;
-    const response = await api.get(`/publication/${id}`);
-    console.log(response.data.postUser[0].userName);
-    response.data.postImg = '../' + response.data.postImg;
-    this.setState({ publication: response.data });
+class Publication extends Component {
+  componentDidMount() {
+    let { id } = this.props.match.params;
+    this.props.fetchSinglePost(id);
   }
 
   render() {
-    // const { publication } = this.state;
-    return (
-      <>
-        <PostsComponent />
-      </>
-    );
+    let post = this.props.post;
+    console.log(post);
+    let componentContent = <PostsComponent postContent={post} />;
+
+    return <>{componentContent}</>;
   }
 }
+
+const mapStateToProps = (state) => ({
+  post: state.posts.item,
+});
+export default connect(mapStateToProps, { fetchSinglePost })(Publication);

@@ -4,8 +4,6 @@ import axios from 'axios';
 
 export const fetchPosts = () => async (dispatch) => {
   const response = await api.get(`/publication`);
-  console.log(response.data);
-  // response.data.postImg = '../' + response.data.postImg;
   dispatch({
     type: FETCH_POSTS,
     payload: response.data,
@@ -14,11 +12,9 @@ export const fetchPosts = () => async (dispatch) => {
 
 export const fetchSinglePost = (postId) => async (dispatch) => {
   const response = await api.get(`/publication/${postId}`);
-  console.log(response.data);
-  // response.data.postImg = '../' + response.data.postImg;
   dispatch({
     type: FETCH_SINGLE_POST,
-    publication: response.data,
+    payload: response.data,
   });
 };
 
